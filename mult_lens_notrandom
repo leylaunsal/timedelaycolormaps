@@ -1,0 +1,127 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+
+
+b = 0.5
+
+m1 = 4.2
+m2 = 3.1
+m3 = 0.04
+m4 = 0.6
+m5 = 2.8
+m6 = 2
+m7 = 5
+m8 = 0.01
+m9 = 1.6
+m10 = 3.5
+p1 = 0.44
+p2 = -0.25
+p3 = -0.65
+p4 = 1.85
+p5 = -3.3
+p6 = -3.3
+p7 = -2.87
+p8 = 4.29
+p9 = 3.83
+p10 = 0.29
+p11 = -1.78
+p12 = 3.86
+p13 = 0.01
+p14 = 1.01
+p15 = 1.01
+p16 = -0.23
+p17 = 4.76
+p18 = -2.8
+
+
+
+
+# Define the equation we're plotting
+def equation(x, y):
+    log_1 = m1*np.log(np.sqrt(x**2 + y**2))
+    log_2 = m2*np.log(np.sqrt((x - p1)**2 + (y - p2)**2))
+    log_3 = m3*np.log(np.sqrt((x - p3)**2 + (y - p4)**2))
+    log_4 = m4*np.log(np.sqrt((x - p5)**2 + (y - p6)**2))
+    log_5 = m5*np.log(np.sqrt((x - p7)**2 + (y - p8)**2))
+    log_6 = m6*np.log(np.sqrt((x - p9)**2 + (y - p10)**2))
+    log_7 = m7*np.log(np.sqrt((x - p11)**2 + (y - p12)**2))
+    log_8 = m8*np.log(np.sqrt((x - p13)**2 + (y - p14)**2))
+    log_9 = m9*np.log(np.sqrt((x - p15)**2 + (y - p16)**2))
+    log_10 = m10*np.log(np.sqrt((x - p17)**2 + (y - p18)**2))
+    return 0.5*((x - b)**2 + y**2) - log_1 - log_2 - log_3 - log_4 - log_5 - log_6 - log_7 - log_8 - log_9 - log_10
+
+# Generate sample data
+x = np.linspace(-5, 5, num=100)
+y = np.linspace(-5, 5, num=100)
+X, Y = np.meshgrid(x, y)
+Z = equation(X, Y)
+
+# Plot color map
+plt.figure(figsize=(8, 6))
+#plt.rcParams.update({'font.size': 15})
+plt.pcolormesh(X, Y, Z, cmap='rainbow')
+plt.colorbar(label='Color Intensity')
+plt.clim(vmin=-30, vmax = 0)
+#plt.title('Figure 4: Color Map of Time Delay From Multiple Point Lenses of Fixed Distance')
+plt.xlabel('x1')
+plt.ylabel('x2')
+
+
+#markers for the point masses
+plt.plot(0, 0, marker="o", markersize=8, markerfacecolor="red")
+plt.plot(p1, p2, marker="o", markersize=8, markerfacecolor="red")
+plt.plot(p3, p4, marker="o", markersize=8, markerfacecolor="red")
+plt.plot(p5, p6, marker="o", markersize=8, markerfacecolor="red")
+plt.plot(p7, p8, marker="o", markersize=8, markerfacecolor="red")
+plt.plot(p9, p10, marker="o", markersize=8, markerfacecolor="red")
+plt.plot(p11, p12, marker="o", markersize=8, markerfacecolor="red")
+plt.plot(p13, p14, marker="o", markersize=8, markerfacecolor="red")
+plt.plot(p15, p16, marker="o", markersize=8, markerfacecolor="red")
+plt.plot(p17, p18, marker="o", markersize=8, markerfacecolor="red")
+
+#LABELS OF EACH POINT MASS
+label1 = "1: mass = " + str(m1) + ", position = " + "(0, 0)"
+label2 = "2: mass = " + str(m2) + ", position = (" + str(p1) + "," + str(p2) + ")"
+label3 = "3: mass = " + str(m3) + ", position = (" + str(p3) + "," + str(p4) + ")"
+label4 = "4: mass = " + str(m4) + ", position = (" + str(p5) + "," + str(p6) + ")"
+label5 = "5: mass = " + str(m5) + ", position = (" + str(p7) + "," + str(p8) + ")"
+label6 = "6: mass = " + str(m6) + ", position = (" + str(p9) + "," + str(p10) + ")"
+label7 = "7: mass = " + str(m7) + ", position = (" + str(p11) + "," + str(p12) + ")"
+label8 = "8: mass = " + str(m8) + ", position = (" + str(p13) + "," + str(p14) + ")"
+label9 = "9: mass = " + str(m9) + ", position = (" + str(p15) + "," + str(p16) + ")"
+label10 = "10: mass = " + str(m10) + ", position = (" + str(p17) + "," + str(p18) + ")"
+
+
+#ANNOTATING EACH POINT MASS
+plt.annotate("1", xy = (0,0), xytext = (0, 0.3), ha = 'center', fontsize = 12)
+plt.annotate("2", xy = (p1,p2), xytext = (p1, p2+0.3), ha = 'center', fontsize = 12)
+plt.annotate("3", xy = (p3,p4), xytext = (p3, p4+0.3), ha = 'center', fontsize = 12)
+plt.annotate("4", xy = (p5,p6), xytext = (p5, p6+0.3), ha = 'center', fontsize = 12)
+plt.annotate("5", xy = (p7,p8), xytext = (p7, p8+0.3), ha = 'center', fontsize = 12)
+plt.annotate("6", xy = (p9,p10), xytext = (p9, p10+0.3), ha = 'center', fontsize = 12)
+plt.annotate("7", xy = (p11,p12), xytext = (p11, p12+0.3), ha = 'center', fontsize = 12)
+plt.annotate("8", xy = (p13,p14), xytext = (p13, p14+0.3), ha = 'center', fontsize = 12)
+plt.annotate("9", xy = (p15,p16), xytext = (p15, p16+0.3), ha = 'center', fontsize = 12)
+plt.annotate("10", xy = (p17,p18), xytext = (p17, p18+0.3), ha = 'center', fontsize = 12)
+
+
+#DESCRIPTION OFF TO THE SIDE FOR THE MASS + POSITION DESCRIPTIONS
+
+plt.text(-0.6, 0.4, label1, ha='center', va='center', transform=plt.gca().transAxes)
+plt.text(-0.6, 0.35, label2, ha='center', va='center', transform=plt.gca().transAxes)
+plt.text(-0.6, 0.3, label3, ha='center', va='center', transform=plt.gca().transAxes)
+plt.text(-0.6, 0.25, label4, ha='center', va='center', transform=plt.gca().transAxes)
+plt.text(-0.6, 0.2, label5, ha='center', va='center', transform=plt.gca().transAxes)
+plt.text(-0.6, 0.15, label6, ha='center', va='center', transform=plt.gca().transAxes)
+plt.text(-0.6, 0.1, label7, ha='center', va='center', transform=plt.gca().transAxes)
+plt.text(-0.6, 0.05, label8, ha='center', va='center', transform=plt.gca().transAxes)
+plt.text(-0.6, 0.0, label9, ha='center', va='center', transform=plt.gca().transAxes)
+plt.text(-0.6, -0.05, label10, ha='center', va='center', transform=plt.gca().transAxes)
+
+plt.show()
+
+#could either fix the points of multiple lenses, or randomly generate the coordinates for 10 point lenses, and put the masses in a certain range, but it's more probable for it to be smaller within the range
+#mass distribution is non trivial--> ex out of 10 lenses, 2 massive ones, 8 smaller ones
+
+#could also add a few (3) contour lines: show contour of a constant time delay: would help differentiate from single to double
